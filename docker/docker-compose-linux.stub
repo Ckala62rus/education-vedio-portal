@@ -1,0 +1,74 @@
+version: '3.3'
+
+networks:
+  internal:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: $SUBNET$
+
+services:
+  $BACKEND$:
+    networks:
+      - internal
+    build: docker/php
+    container_name: $BACKEND$
+    working_dir: /var/www/
+    volumes:
+      - ./docker/php/config/php.ini:/usr/local/etc/php/conf.d/40-custom.ini
+      - ./backend/:/var/www/
+      - ./docker/php/logs/:/var/log/php/
+    depends_on:
+      - $MYSQL$
+    environment:
+      XDEBUG_MODE: develop,debug
+      XDEBUG_CONFIG: client_host=$SUBNET_FIRST$ client_port=9000
+      PHP_IDE_CONFIG: serverName=PHPSTORM
+
+  $XHPROF$:
+    networks:
+      - internal
+    image: tuimedia/xhprof-docker:0.9.4
+    volumes:
+      - ./docker/php/logs/:/profiles/
+    ports:
+      - "$XHPROF_PORT$:80"
+
+  $NGINX$:
+    networks:
+      - internal
+    image: nginx:1.21.1
+    container_name: $NGINX$
+    ports:
+      - $NGINX_PORT$:80
+    volumes:
+      - ./docker/nginx/config/nginx.conf:/etc/nginx/nginx.conf
+      - ./docker/nginx/config/conf.d/:/etc/nginx/conf.d
+      - ./docker/nginx/certs/:/etc/nginx/certs
+      - ./docker/nginx/htpasswd/:/etc/nginx/htpasswd
+      - ./docker/nginx/templates/:/etc/nginx/templates
+      - ./docker/nginx/logs/:/var/log/nginx
+      - ./backend/:/var/www
+    depends_on:
+      - $BACKEND$
+    environment:
+      NGINX_UPSTREAM: $BACKEND$:9000
+
+  $MYSQL$:
+    networks:
+      - internal
+    image: mysql:8.0.26
+    container_name: $MYSQL$
+    command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci','--default-authentication-plugin=mysql_native_password']
+    volumes:
+      - ./docker/mysql/config/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./docker/mysql/mysql/:/var/lib/mysql:rw
+      - ./docker/mysql/logs/:/var/log/mysql:rw
+    ports:
+      - "$MYSQL_PORT$:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=000000
+      - MYSQL_DATABASE=docker-boilerplate
+      - MYSQL_USER=docker-boilerplate
+      - MYSQL_PASSWORD=docker-boilerplate
