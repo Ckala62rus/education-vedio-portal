@@ -14,7 +14,7 @@
     },
     "servers": [
         {
-            "url": "http://template",
+            "url": "http://localhost",
             "description": "Demo API Server"
         }
     ],
@@ -230,5 +230,11 @@
                 "scheme": "bearer"
             }
         }
-    }
+    },
+    "tags": [
+        {
+            "name": "Auth",
+            "description": "Auth"
+        }
+    ]
 }
