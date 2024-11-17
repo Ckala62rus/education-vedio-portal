@@ -67,6 +67,8 @@
 
         </div>
     </div>
+
+<!--    <div class="offcanvas-overlay"></div>-->
 </template>
 
 <script>
@@ -78,6 +80,7 @@ export default {
             avatarUrl: '/template/media/users/300_21.jpg', // default avatar
             file: null,
             user: null,
+            canvas: false,
         }
     },
 

@@ -30,35 +30,36 @@
 
     <div class="d-flex flex-column flex-root">
 
-        <Sidebar />
+        <div class="d-flex flex-row flex-column-fluid page">
+            <Sidebar />
 
-        <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
+            <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
 
-            <div class="">
-                <slot/>
-            </div>
+                <div class="">
+                    <slot/>
+                </div>
 
-            <div id="kt_header" class="header  header-fixed ">
-                <div class="container-fluid d-flex align-items-center justify-content-between">
-                    <div class="header-menu-wrapper header-menu-wrapper-left" id="kt_header_menu_wrapper">
+                <div id="kt_header" class="header  header-fixed ">
+                    <div class="container-fluid d-flex align-items-center justify-content-between">
+                        <div class="header-menu-wrapper header-menu-wrapper-left" id="kt_header_menu_wrapper">
 
-                        <div id="kt_header_menu" class="header-menu header-menu-mobile  header-menu-layout-default ">
-                            <ul class="menu-nav ">
-                                <li class="menu-item  menu-item-active " aria-haspopup="true"><a href="#"
-                                                                                                 class="menu-link "><span
-                                    class="menu-text">Dashboard</span></a></li>
-                                <li class="menu-item  menu-item-submenu menu-item-rel" data-menu-toggle="click"
-                                    aria-haspopup="true"><a href="#" class="menu-link menu-toggle"><span
-                                    class="menu-text">Features</span><i class="menu-arrow"></i></a>
-                                    <div class="menu-submenu menu-submenu-classic menu-submenu-left">
-                                        <ul class="menu-subnav">
-                                            <li class="menu-item  menu-item-submenu" data-menu-toggle="hover"
-                                                aria-haspopup="true"><a href="#" class="menu-link menu-toggle">
+                            <div id="kt_header_menu" class="header-menu header-menu-mobile  header-menu-layout-default ">
+                                <ul class="menu-nav ">
+                                    <li class="menu-item  menu-item-active " aria-haspopup="true"><a href="#"
+                                                                                                     class="menu-link "><span
+                                        class="menu-text">Dashboard</span></a></li>
+                                    <li class="menu-item  menu-item-submenu menu-item-rel" data-menu-toggle="click"
+                                        aria-haspopup="true"><a href="#" class="menu-link menu-toggle"><span
+                                        class="menu-text">Features</span><i class="menu-arrow"></i></a>
+                                        <div class="menu-submenu menu-submenu-classic menu-submenu-left">
+                                            <ul class="menu-subnav">
+                                                <li class="menu-item  menu-item-submenu" data-menu-toggle="hover"
+                                                    aria-haspopup="true"><a href="#" class="menu-link menu-toggle">
                                                 <span class="svg-icon menu-icon"><!--begin::Svg Icon | path:media/svg/icons/Communication/Add-user.svg-->
                                                     <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-                                                    height="24px" viewBox="0 0 24 24" version="1.1">
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                                                        height="24px" viewBox="0 0 24 24" version="1.1">
                                                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                     <polygon points="0 0 24 0 24 24 0 24"/>
                                                     <path d="M18,8 L16,8 C15.4477153,8 15,7.55228475 15,7 C15,6.44771525 15.4477153,6 16,6 L18,6 L18,4 C18,3.44771525 18.4477153,3 19,3 C19.5522847,3 20,3.44771525 20,4 L20,6 L22,6 C22.5522847,6 23,6.44771525 23,7 C23,7.55228475 22.5522847,8 22,8 L20,8 L20,10 C20,10.5522847 19.5522847,11 19,11 C18.4477153,11 18,10.5522847 18,10 L18,8 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z"
@@ -68,78 +69,78 @@
                                                     </g>
                                                 </svg><!--end::Svg Icon-->
                                                 </span><span class="menu-text">Bootstrap</span><i class="menu-hor-arrow"></i><i
-                                                class="menu-arrow"></i></a>
-                                                <div class="menu-submenu menu-submenu-classic menu-submenu-right">
-                                                    <ul class="menu-subnav">
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="#"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Utilities</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="#"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Typography</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="#"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Buttons</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="#"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Button Group</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="#"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Dropdown</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="#"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Navs</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="#"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Tables</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="#"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Progress</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="#"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Modal</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="#"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Alerts</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="#"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Popover</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="#"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Tooltip</span></a></li>
-                                                    </ul>
-                                                </div>
-                                            </li>
-                                            <li class="menu-item  menu-item-submenu" data-menu-toggle="hover"
-                                                aria-haspopup="true"><a href="#" class="menu-link menu-toggle"><span
-                                                class="svg-icon menu-icon"><!--begin::Svg Icon | path:media/svg/icons/Files/Pictures1.svg--><svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-                                                height="24px" viewBox="0 0 24 24" version="1.1">
+                                                    class="menu-arrow"></i></a>
+                                                    <div class="menu-submenu menu-submenu-classic menu-submenu-right">
+                                                        <ul class="menu-subnav">
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="#"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Utilities</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="#"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Typography</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="#"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Buttons</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="#"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Button Group</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="#"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Dropdown</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="#"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Navs</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="#"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Tables</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="#"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Progress</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="#"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Modal</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="#"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Alerts</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="#"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Popover</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="#"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Tooltip</span></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                                <li class="menu-item  menu-item-submenu" data-menu-toggle="hover"
+                                                    aria-haspopup="true"><a href="#" class="menu-link menu-toggle"><span
+                                                    class="svg-icon menu-icon"><!--begin::Svg Icon | path:media/svg/icons/Files/Pictures1.svg--><svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                                                    height="24px" viewBox="0 0 24 24" version="1.1">
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
     <rect x="0" y="0" width="24" height="24"/>
     <path d="M3.5,21 L20.5,21 C21.3284271,21 22,20.3284271 22,19.5 L22,8.5 C22,7.67157288 21.3284271,7 20.5,7 L10,7 L7.43933983,4.43933983 C7.15803526,4.15803526 6.77650439,4 6.37867966,4 L3.5,4 C2.67157288,4 2,4.67157288 2,5.5 L2,19.5 C2,20.3284271 2.67157288,21 3.5,21 Z"
@@ -150,121 +151,121 @@
           fill="#000000" opacity="0.3"/>
     </g>
     </svg><!--end::Svg Icon--></span><span class="menu-text">Custom</span><i class="menu-hor-arrow"></i><i
-                                                class="menu-arrow"></i></a>
-                                                <div class="menu-submenu menu-submenu-classic menu-submenu-right">
-                                                    <ul class="menu-subnav">
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/custom/utilities"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Utilities</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/custom/accordions"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Accordions</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/custom/labels"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Label</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/custom/line-tabs"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Line Tabs</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/custom/advance-navs"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Advance Navigations</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/custom/timeline"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Timeline</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/custom/pagination"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Pagination</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/custom/media"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Media</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/custom/spinners"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Spinners</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/custom/iconbox"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Iconbox</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/custom/callout"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Callout</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/custom/ribbons"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Ribbons</span></a></li>
-                                                    </ul>
-                                                </div>
-                                            </li>
-                                            <li class="menu-item  menu-item-submenu" data-menu-toggle="hover"
-                                                aria-haspopup="true"><a href="#" class="menu-link menu-toggle"><span
-                                                class="svg-icon menu-icon"><!--begin::Svg Icon | path:media/svg/icons/Communication/Address-card.svg--><svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-                                                height="24px" viewBox="0 0 24 24" version="1.1">
+                                                    class="menu-arrow"></i></a>
+                                                    <div class="menu-submenu menu-submenu-classic menu-submenu-right">
+                                                        <ul class="menu-subnav">
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/custom/utilities"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Utilities</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/custom/accordions"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Accordions</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/custom/labels"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Label</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/custom/line-tabs"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Line Tabs</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/custom/advance-navs"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Advance Navigations</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/custom/timeline"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Timeline</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/custom/pagination"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Pagination</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/custom/media"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Media</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/custom/spinners"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Spinners</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/custom/iconbox"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Iconbox</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/custom/callout"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Callout</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/custom/ribbons"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Ribbons</span></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                                <li class="menu-item  menu-item-submenu" data-menu-toggle="hover"
+                                                    aria-haspopup="true"><a href="#" class="menu-link menu-toggle"><span
+                                                    class="svg-icon menu-icon"><!--begin::Svg Icon | path:media/svg/icons/Communication/Address-card.svg--><svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                                                    height="24px" viewBox="0 0 24 24" version="1.1">
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
     <rect x="0" y="0" width="24" height="24"/>
     <path d="M6,2 L18,2 C19.6568542,2 21,3.34314575 21,5 L21,19 C21,20.6568542 19.6568542,22 18,22 L6,22 C4.34314575,22 3,20.6568542 3,19 L3,5 C3,3.34314575 4.34314575,2 6,2 Z M12,11 C13.1045695,11 14,10.1045695 14,9 C14,7.8954305 13.1045695,7 12,7 C10.8954305,7 10,7.8954305 10,9 C10,10.1045695 10.8954305,11 12,11 Z M7.00036205,16.4995035 C6.98863236,16.6619875 7.26484009,17 7.4041679,17 C11.463736,17 14.5228466,17 16.5815,17 C16.9988413,17 17.0053266,16.6221713 16.9988413,16.5 C16.8360465,13.4332455 14.6506758,12 11.9907452,12 C9.36772908,12 7.21569918,13.5165724 7.00036205,16.4995035 Z"
           fill="#000000"/>
     </g>
     </svg><!--end::Svg Icon--></span><span class="menu-text">Icons</span><i class="menu-hor-arrow"></i><i
-                                                class="menu-arrow"></i></a>
-                                                <div class="menu-submenu menu-submenu-classic menu-submenu-right">
-                                                    <ul class="menu-subnav">
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/icons/flaticon"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Flaticon</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/icons/fontawesome5"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Fontawesome 5</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/icons/lineawesome"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Lineawesome</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/icons/socicons"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Socicons</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/svg/icons"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">SVG Icons</span></a></li>
-                                                    </ul>
-                                                </div>
-                                            </li>
-                                            <li class="menu-item  menu-item-submenu" data-menu-toggle="hover"
-                                                aria-haspopup="true"><a href="#" class="menu-link menu-toggle"><span
-                                                class="svg-icon menu-icon"><!--begin::Svg Icon | path:media/svg/icons/Communication/Adress-book2.svg--><svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-                                                height="24px" viewBox="0 0 24 24" version="1.1">
+                                                    class="menu-arrow"></i></a>
+                                                    <div class="menu-submenu menu-submenu-classic menu-submenu-right">
+                                                        <ul class="menu-subnav">
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/icons/flaticon"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Flaticon</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/icons/fontawesome5"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Fontawesome 5</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/icons/lineawesome"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Lineawesome</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/icons/socicons"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Socicons</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/svg/icons"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">SVG Icons</span></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                                <li class="menu-item  menu-item-submenu" data-menu-toggle="hover"
+                                                    aria-haspopup="true"><a href="#" class="menu-link menu-toggle"><span
+                                                    class="svg-icon menu-icon"><!--begin::Svg Icon | path:media/svg/icons/Communication/Adress-book2.svg--><svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                                                    height="24px" viewBox="0 0 24 24" version="1.1">
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
     <rect x="0" y="0" width="24" height="24"/>
     <path d="M18,2 L20,2 C21.6568542,2 23,3.34314575 23,5 L23,19 C23,20.6568542 21.6568542,22 20,22 L18,22 L18,2 Z"
@@ -273,53 +274,53 @@
           fill="#000000"/>
     </g>
     </svg><!--end::Svg Icon--></span><span class="menu-text">Cards</span><i class="menu-hor-arrow"></i><i
-                                                class="menu-arrow"></i></a>
-                                                <div class="menu-submenu menu-submenu-classic menu-submenu-right">
-                                                    <ul class="menu-subnav">
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/cards/general"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">General Cards</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/cards/stacked"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Stacked Cards</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/cards/tabbed"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Tabbed Cards</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/cards/draggable"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Draggable Cards</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/cards/tools"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Cards Tools</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/cards/sticky"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Sticky Cards</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/cards/stretched"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Stretched Cards</span></a></li>
-                                                    </ul>
-                                                </div>
-                                            </li>
-                                            <li class="menu-item  menu-item-submenu" data-menu-toggle="hover"
-                                                aria-haspopup="true"><a href="#" class="menu-link menu-toggle"><span
-                                                class="svg-icon menu-icon"><!--begin::Svg Icon | path:media/svg/icons/Communication/Chat1.svg--><svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-                                                height="24px" viewBox="0 0 24 24" version="1.1">
+                                                    class="menu-arrow"></i></a>
+                                                    <div class="menu-submenu menu-submenu-classic menu-submenu-right">
+                                                        <ul class="menu-subnav">
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/cards/general"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">General Cards</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/cards/stacked"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Stacked Cards</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/cards/tabbed"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Tabbed Cards</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/cards/draggable"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Draggable Cards</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/cards/tools"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Cards Tools</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/cards/sticky"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Sticky Cards</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/cards/stretched"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Stretched Cards</span></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                                <li class="menu-item  menu-item-submenu" data-menu-toggle="hover"
+                                                    aria-haspopup="true"><a href="#" class="menu-link menu-toggle"><span
+                                                    class="svg-icon menu-icon"><!--begin::Svg Icon | path:media/svg/icons/Communication/Chat1.svg--><svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                                                    height="24px" viewBox="0 0 24 24" version="1.1">
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
     <rect x="0" y="0" width="24" height="24"/>
     <polygon fill="#000000" opacity="0.3" points="5 15 3 21.5 9.5 19.5"/>
@@ -327,63 +328,63 @@
           fill="#000000"/>
     </g>
     </svg><!--end::Svg Icon--></span><span class="menu-text">Widgets</span><i class="menu-hor-arrow"></i><i
-                                                class="menu-arrow"></i></a>
-                                                <div class="menu-submenu menu-submenu-classic menu-submenu-right">
-                                                    <ul class="menu-subnav">
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/widgets/lists"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Lists</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/widgets/stats"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Stats</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/widgets/charts"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Charts</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/widgets/charts"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Charts</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/widgets/mixed"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Mixed</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/widgets/tiles"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Tiles</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/widgets/engage"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Engage</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/widgets/tables"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Tables</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/widgets/forms"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Forms</span></a></li>
-                                                    </ul>
-                                                </div>
-                                            </li>
-                                            <li class="menu-item  menu-item-submenu" data-menu-toggle="hover"
-                                                aria-haspopup="true"><a href="#" class="menu-link menu-toggle"><span
-                                                class="svg-icon menu-icon"><!--begin::Svg Icon | path:media/svg/icons/Communication/Chat-check.svg--><svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-                                                height="24px" viewBox="0 0 24 24" version="1.1">
+                                                    class="menu-arrow"></i></a>
+                                                    <div class="menu-submenu menu-submenu-classic menu-submenu-right">
+                                                        <ul class="menu-subnav">
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/widgets/lists"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Lists</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/widgets/stats"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Stats</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/widgets/charts"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Charts</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/widgets/charts"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Charts</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/widgets/mixed"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Mixed</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/widgets/tiles"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Tiles</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/widgets/engage"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Engage</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/widgets/tables"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Tables</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/widgets/forms"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Forms</span></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                                <li class="menu-item  menu-item-submenu" data-menu-toggle="hover"
+                                                    aria-haspopup="true"><a href="#" class="menu-link menu-toggle"><span
+                                                    class="svg-icon menu-icon"><!--begin::Svg Icon | path:media/svg/icons/Communication/Chat-check.svg--><svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                                                    height="24px" viewBox="0 0 24 24" version="1.1">
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
     <rect x="0" y="0" width="24" height="24"/>
     <path d="M4.875,20.75 C4.63541667,20.75 4.39583333,20.6541667 4.20416667,20.4625 L2.2875,18.5458333 C1.90416667,18.1625 1.90416667,17.5875 2.2875,17.2041667 C2.67083333,16.8208333 3.29375,16.8208333 3.62916667,17.2041667 L4.875,18.45 L8.0375,15.2875 C8.42083333,14.9041667 8.99583333,14.9041667 9.37916667,15.2875 C9.7625,15.6708333 9.7625,16.2458333 9.37916667,16.6291667 L5.54583333,20.4625 C5.35416667,20.6541667 5.11458333,20.75 4.875,20.75 Z"
@@ -392,43 +393,43 @@
           fill="#000000"/>
     </g>
     </svg><!--end::Svg Icon--></span><span class="menu-text">Calendar</span><i class="menu-hor-arrow"></i><i
-                                                class="menu-arrow"></i></a>
-                                                <div class="menu-submenu menu-submenu-classic menu-submenu-right">
-                                                    <ul class="menu-subnav">
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/calendar/basic"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Basic Calendar</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/calendar/list-view"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">List Views</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/calendar/google"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Google Calendar</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/calendar/external-events"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">External Events</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/calendar/background-events"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Background Events</span></a></li>
-                                                    </ul>
-                                                </div>
-                                            </li>
-                                            <li class="menu-item  menu-item-submenu" data-menu-toggle="hover"
-                                                aria-haspopup="true"><a href="#" class="menu-link menu-toggle"><span
-                                                class="svg-icon menu-icon"><!--begin::Svg Icon | path:media/svg/icons/Communication/Dial-numbers.svg--><svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-                                                height="24px" viewBox="0 0 24 24" version="1.1">
+                                                    class="menu-arrow"></i></a>
+                                                    <div class="menu-submenu menu-submenu-classic menu-submenu-right">
+                                                        <ul class="menu-subnav">
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/calendar/basic"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Basic Calendar</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/calendar/list-view"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">List Views</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/calendar/google"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Google Calendar</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/calendar/external-events"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">External Events</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/calendar/background-events"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Background Events</span></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                                <li class="menu-item  menu-item-submenu" data-menu-toggle="hover"
+                                                    aria-haspopup="true"><a href="#" class="menu-link menu-toggle"><span
+                                                    class="svg-icon menu-icon"><!--begin::Svg Icon | path:media/svg/icons/Communication/Dial-numbers.svg--><svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                                                    height="24px" viewBox="0 0 24 24" version="1.1">
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
     <rect x="0" y="0" width="24" height="24"/>
     <rect fill="#000000" opacity="0.3" x="4" y="4" width="4" height="4" rx="2"/>
@@ -442,63 +443,63 @@
     <rect fill="#000000" x="16" y="16" width="4" height="4" rx="2"/>
     </g>
     </svg><!--end::Svg Icon--></span><span class="menu-text">Charts</span><i class="menu-hor-arrow"></i><i
-                                                class="menu-arrow"></i></a>
-                                                <div class="menu-submenu menu-submenu-classic menu-submenu-right">
-                                                    <ul class="menu-subnav">
-                                                        <li class="menu-item  menu-item-submenu"
-                                                            data-menu-toggle="hover" aria-haspopup="true"><a href="#"
-                                                                                                             class="menu-link menu-toggle"><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">amCharts</span><i
-                                                            class="menu-hor-arrow"></i><i
-                                                            class="menu-arrow"></i></a>
-                                                            <div class="menu-submenu menu-submenu-classic menu-submenu-right">
-                                                                <ul class="menu-subnav">
-                                                                    <li class="menu-item " aria-haspopup="true"><a
-                                                                        href="http://metro/features/charts/amcharts/charts"
-                                                                        class="menu-link "><i
-                                                                        class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                                        class="menu-text">amCharts Charts</span></a>
-                                                                    </li>
-                                                                    <li class="menu-item " aria-haspopup="true"><a
-                                                                        href="http://metro/features/charts/amcharts/stock-charts"
-                                                                        class="menu-link "><i
-                                                                        class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                                        class="menu-text">amCharts Stock Charts</span></a>
-                                                                    </li>
-                                                                    <li class="menu-item " aria-haspopup="true"><a
-                                                                        href="http://metro/features/charts/amcharts/maps"
-                                                                        class="menu-link "><i
-                                                                        class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                                        class="menu-text">amCharts Maps</span></a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/charts/flotcharts"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Flot Charts</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/charts/google-charts"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Google Charts</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/charts/morris-charts"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Morris Charts</span></a></li>
-                                                    </ul>
-                                                </div>
-                                            </li>
-                                            <li class="menu-item  menu-item-submenu" data-menu-toggle="hover"
-                                                aria-haspopup="true"><a href="#" class="menu-link menu-toggle"><span
-                                                class="svg-icon menu-icon"><!--begin::Svg Icon | path:media/svg/icons/Communication/Incoming-box.svg--><svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-                                                height="24px" viewBox="0 0 24 24" version="1.1">
+                                                    class="menu-arrow"></i></a>
+                                                    <div class="menu-submenu menu-submenu-classic menu-submenu-right">
+                                                        <ul class="menu-subnav">
+                                                            <li class="menu-item  menu-item-submenu"
+                                                                data-menu-toggle="hover" aria-haspopup="true"><a href="#"
+                                                                                                                 class="menu-link menu-toggle"><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">amCharts</span><i
+                                                                class="menu-hor-arrow"></i><i
+                                                                class="menu-arrow"></i></a>
+                                                                <div class="menu-submenu menu-submenu-classic menu-submenu-right">
+                                                                    <ul class="menu-subnav">
+                                                                        <li class="menu-item " aria-haspopup="true"><a
+                                                                            href="http://metro/features/charts/amcharts/charts"
+                                                                            class="menu-link "><i
+                                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                            class="menu-text">amCharts Charts</span></a>
+                                                                        </li>
+                                                                        <li class="menu-item " aria-haspopup="true"><a
+                                                                            href="http://metro/features/charts/amcharts/stock-charts"
+                                                                            class="menu-link "><i
+                                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                            class="menu-text">amCharts Stock Charts</span></a>
+                                                                        </li>
+                                                                        <li class="menu-item " aria-haspopup="true"><a
+                                                                            href="http://metro/features/charts/amcharts/maps"
+                                                                            class="menu-link "><i
+                                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                            class="menu-text">amCharts Maps</span></a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/charts/flotcharts"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Flot Charts</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/charts/google-charts"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Google Charts</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/charts/morris-charts"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Morris Charts</span></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                                <li class="menu-item  menu-item-submenu" data-menu-toggle="hover"
+                                                    aria-haspopup="true"><a href="#" class="menu-link menu-toggle"><span
+                                                    class="svg-icon menu-icon"><!--begin::Svg Icon | path:media/svg/icons/Communication/Incoming-box.svg--><svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                                                    height="24px" viewBox="0 0 24 24" version="1.1">
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
     <rect x="0" y="0" width="24" height="24"/>
     <path d="M22,17 L22,21 C22,22.1045695 21.1045695,23 20,23 L4,23 C2.8954305,23 2,22.1045695 2,21 L2,17 L6.27924078,17 L6.82339262,18.6324555 C7.09562072,19.4491398 7.8598984,20 8.72075922,20 L15.381966,20 C16.1395101,20 16.8320364,19.5719952 17.1708204,18.8944272 L18.118034,17 L22,17 Z"
@@ -510,28 +511,28 @@
           transform="translate(11.959697, 3.661508) rotate(-270.000000) translate(-11.959697, -3.661508) "/>
     </g>
     </svg><!--end::Svg Icon--></span><span class="menu-text">Maps</span><i class="menu-hor-arrow"></i><i
-                                                class="menu-arrow"></i></a>
-                                                <div class="menu-submenu menu-submenu-classic menu-submenu-right">
-                                                    <ul class="menu-subnav">
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/maps/google-maps"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Google Maps</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/maps/jqvmap"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">JQVMap</span></a></li>
-                                                    </ul>
-                                                </div>
-                                            </li>
-                                            <li class="menu-item  menu-item-submenu" data-menu-toggle="hover"
-                                                aria-haspopup="true"><a href="#" class="menu-link menu-toggle"><span
-                                                class="svg-icon menu-icon"><!--begin::Svg Icon | path:media/svg/icons/Communication/Active-call.svg--><svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-                                                height="24px" viewBox="0 0 24 24" version="1.1">
+                                                    class="menu-arrow"></i></a>
+                                                    <div class="menu-submenu menu-submenu-classic menu-submenu-right">
+                                                        <ul class="menu-subnav">
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/maps/google-maps"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Google Maps</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/maps/jqvmap"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">JQVMap</span></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                                <li class="menu-item  menu-item-submenu" data-menu-toggle="hover"
+                                                    aria-haspopup="true"><a href="#" class="menu-link menu-toggle"><span
+                                                    class="svg-icon menu-icon"><!--begin::Svg Icon | path:media/svg/icons/Communication/Active-call.svg--><svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                                                    height="24px" viewBox="0 0 24 24" version="1.1">
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
     <rect x="0" y="0" width="24" height="24"/>
     <path d="M13.0799676,14.7839934 L15.2839934,12.5799676 C15.8927139,11.9712471 16.0436229,11.0413042 15.6586342,10.2713269 L15.5337539,10.0215663 C15.1487653,9.25158901 15.2996742,8.3216461 15.9083948,7.71292558 L18.6411989,4.98012149 C18.836461,4.78485934 19.1530435,4.78485934 19.3483056,4.98012149 C19.3863063,5.01812215 19.4179321,5.06200062 19.4419658,5.11006808 L20.5459415,7.31801948 C21.3904962,9.0071287 21.0594452,11.0471565 19.7240871,12.3825146 L13.7252616,18.3813401 C12.2717221,19.8348796 10.1217008,20.3424308 8.17157288,19.6923882 L5.75709327,18.8875616 C5.49512161,18.8002377 5.35354162,18.5170777 5.4408655,18.2551061 C5.46541191,18.1814669 5.50676633,18.114554 5.56165376,18.0596666 L8.21292558,15.4083948 C8.8216461,14.7996742 9.75158901,14.6487653 10.5215663,15.0337539 L10.7713269,15.1586342 C11.5413042,15.5436229 12.4712471,15.3927139 13.0799676,14.7839934 Z"
@@ -540,115 +541,115 @@
           fill="#000000" fill-rule="nonzero" opacity="0.3"/>
     </g>
     </svg><!--end::Svg Icon--></span><span class="menu-text">Miscellaneous</span><i class="menu-hor-arrow"></i><i
-                                                class="menu-arrow"></i></a>
-                                                <div class="menu-submenu menu-submenu-classic menu-submenu-right">
-                                                    <ul class="menu-subnav">
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/miscellaneous/kanban-board"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Kanban Board</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/miscellaneous/sticky-panels"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Sticky Panels</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/miscellaneous/blockui"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Block UI</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/miscellaneous/perfect-scrollbar"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Perfect Scrollbar</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/miscellaneous/treeview"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Tree View</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/miscellaneous/bootstrap-notify"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Bootstrap Notify</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/miscellaneous/toastr"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Toastr</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/miscellaneous/sweetalert2"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">SweetAlert2</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/miscellaneous/dual-listbox"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Dual Listbox</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/miscellaneous/session-timeout"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Session Timeout</span></a></li>
-                                                        <li class="menu-item " aria-haspopup="true"><a
-                                                            href="http://metro/features/miscellaneous/idle-timer"
-                                                            class="menu-link "><i
-                                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                            class="menu-text">Idle Timer</span></a></li>
-                                                    </ul>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            </ul>
+                                                    class="menu-arrow"></i></a>
+                                                    <div class="menu-submenu menu-submenu-classic menu-submenu-right">
+                                                        <ul class="menu-subnav">
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/miscellaneous/kanban-board"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Kanban Board</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/miscellaneous/sticky-panels"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Sticky Panels</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/miscellaneous/blockui"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Block UI</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/miscellaneous/perfect-scrollbar"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Perfect Scrollbar</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/miscellaneous/treeview"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Tree View</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/miscellaneous/bootstrap-notify"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Bootstrap Notify</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/miscellaneous/toastr"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Toastr</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/miscellaneous/sweetalert2"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">SweetAlert2</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/miscellaneous/dual-listbox"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Dual Listbox</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/miscellaneous/session-timeout"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Session Timeout</span></a></li>
+                                                            <li class="menu-item " aria-haspopup="true"><a
+                                                                href="http://metro/features/miscellaneous/idle-timer"
+                                                                class="menu-link "><i
+                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                class="menu-text">Idle Timer</span></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="topbar">
-                        <div class="dropdown">
-                            <div class="dropdown-menu p-0 m-0 dropdown-menu-right dropdown-menu-anim-up dropdown-menu-lg">
-                                <form>
-                                    <div class="d-flex flex-column pt-12 bgi-size-cover bgi-no-repeat rounded-top"
-                                         style="background-image: url('http://metro/media/misc/bg-1.jpg')">
+                        <div class="topbar">
+                            <div class="dropdown">
+                                <div class="dropdown-menu p-0 m-0 dropdown-menu-right dropdown-menu-anim-up dropdown-menu-lg">
+                                    <form>
+                                        <div class="d-flex flex-column pt-12 bgi-size-cover bgi-no-repeat rounded-top"
+                                             style="background-image: url('http://metro/media/misc/bg-1.jpg')">
 
-                                        <h4 class="d-flex flex-center rounded-top">
-                                            <span class="text-white">User Notifications</span>
-                                            <span class="btn btn-text btn-success btn-sm font-weight-bold btn-font-md ml-2">23 new</span>
-                                        </h4>
-
-
-                                        <ul class="nav nav-bold nav-tabs nav-tabs-line nav-tabs-line-3x nav-tabs-line-transparent-white nav-tabs-line-active-border-success mt-3 px-8"
-                                            role="tablist">
-                                            <li class="nav-item">
-                                                <a class="nav-link active show" data-toggle="tab"
-                                                   href="#topbar_notifications_notifications">Alerts</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" data-toggle="tab"
-                                                   href="#topbar_notifications_events">Events</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" data-toggle="tab" href="#topbar_notifications_logs">Logs</a>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                            <h4 class="d-flex flex-center rounded-top">
+                                                <span class="text-white">User Notifications</span>
+                                                <span class="btn btn-text btn-success btn-sm font-weight-bold btn-font-md ml-2">23 new</span>
+                                            </h4>
 
 
-                                    <div class="tab-content">
+                                            <ul class="nav nav-bold nav-tabs nav-tabs-line nav-tabs-line-3x nav-tabs-line-transparent-white nav-tabs-line-active-border-success mt-3 px-8"
+                                                role="tablist">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active show" data-toggle="tab"
+                                                       href="#topbar_notifications_notifications">Alerts</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-toggle="tab"
+                                                       href="#topbar_notifications_events">Events</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-toggle="tab" href="#topbar_notifications_logs">Logs</a>
+                                                </li>
+                                            </ul>
+                                        </div>
 
-                                        <div class="tab-pane active show p-8" id="topbar_notifications_notifications"
-                                             role="tabpanel">
 
-                                            <div class="scroll pr-7 mr-n7" data-scroll="true" data-height="300"
-                                                 data-mobile-height="200">
+                                        <div class="tab-content">
 
-                                                <div class="d-flex align-items-center mb-6">
+                                            <div class="tab-pane active show p-8" id="topbar_notifications_notifications"
+                                                 role="tabpanel">
 
-                                                    <div class="symbol symbol-40 symbol-light-primary mr-5">
+                                                <div class="scroll pr-7 mr-n7" data-scroll="true" data-height="300"
+                                                     data-mobile-height="200">
+
+                                                    <div class="d-flex align-items-center mb-6">
+
+                                                        <div class="symbol symbol-40 symbol-light-primary mr-5">
                 <span class="symbol-label">
                     <span class="svg-icon svg-icon-lg svg-icon-primary"><!--begin::Svg Icon | path:media/svg/icons/Home/Library.svg--><svg
                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -663,21 +664,21 @@
     </g>
     </svg><!--end::Svg Icon--></span>
                 </span>
+                                                        </div>
+
+
+                                                        <div class="d-flex flex-column font-weight-bold">
+                                                            <a href="#"
+                                                               class="text-dark text-hover-primary mb-1 font-size-lg">Briviba
+                                                                SaaS</a>
+                                                            <span class="text-muted">PHP, SQLite, Artisan CLIмм</span>
+                                                        </div>
                                                     </div>
 
 
-                                                    <div class="d-flex flex-column font-weight-bold">
-                                                        <a href="#"
-                                                           class="text-dark text-hover-primary mb-1 font-size-lg">Briviba
-                                                            SaaS</a>
-                                                        <span class="text-muted">PHP, SQLite, Artisan CLIмм</span>
-                                                    </div>
-                                                </div>
+                                                    <div class="d-flex align-items-center mb-6">
 
-
-                                                <div class="d-flex align-items-center mb-6">
-
-                                                    <div class="symbol symbol-40 symbol-light-warning mr-5">
+                                                        <div class="symbol symbol-40 symbol-light-warning mr-5">
                 <span class="symbol-label">
                     <span class="svg-icon svg-icon-lg svg-icon-warning"><!--begin::Svg Icon | path:media/svg/icons/Communication/Write.svg--><svg
                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -692,21 +693,21 @@
     </g>
     </svg><!--end::Svg Icon--></span>
                 </span>
+                                                        </div>
+
+
+                                                        <div class="d-flex flex-column font-weight-bold">
+                                                            <a href="#"
+                                                               class="text-dark-75 text-hover-primary mb-1 font-size-lg">Briviba
+                                                                SaaS</a>
+                                                            <span class="text-muted">PHP, SQLite, Artisan CLIмм</span>
+                                                        </div>
                                                     </div>
 
 
-                                                    <div class="d-flex flex-column font-weight-bold">
-                                                        <a href="#"
-                                                           class="text-dark-75 text-hover-primary mb-1 font-size-lg">Briviba
-                                                            SaaS</a>
-                                                        <span class="text-muted">PHP, SQLite, Artisan CLIмм</span>
-                                                    </div>
-                                                </div>
+                                                    <div class="d-flex align-items-center mb-6">
 
-
-                                                <div class="d-flex align-items-center mb-6">
-
-                                                    <div class="symbol symbol-40 symbol-light-success mr-5">
+                                                        <div class="symbol symbol-40 symbol-light-success mr-5">
                 <span class="symbol-label">
                     <span class="svg-icon svg-icon-lg svg-icon-success"><!--begin::Svg Icon | path:media/svg/icons/Communication/Group-chat.svg--><svg
                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -720,21 +721,21 @@
     </g>
     </svg><!--end::Svg Icon--></span>
                 </span>
+                                                        </div>
+
+
+                                                        <div class="d-flex flex-column font-weight-bold">
+                                                            <a href="#"
+                                                               class="text-dark text-hover-primary mb-1 font-size-lg">Briviba
+                                                                SaaS</a>
+                                                            <span class="text-muted">PHP, SQLite, Artisan CLIмм</span>
+                                                        </div>
                                                     </div>
 
 
-                                                    <div class="d-flex flex-column font-weight-bold">
-                                                        <a href="#"
-                                                           class="text-dark text-hover-primary mb-1 font-size-lg">Briviba
-                                                            SaaS</a>
-                                                        <span class="text-muted">PHP, SQLite, Artisan CLIмм</span>
-                                                    </div>
-                                                </div>
+                                                    <div class="d-flex align-items-center mb-6">
 
-
-                                                <div class="d-flex align-items-center mb-6">
-
-                                                    <div class="symbol symbol-40 symbol-light-danger mr-5">
+                                                        <div class="symbol symbol-40 symbol-light-danger mr-5">
                 <span class="symbol-label">
                     <span class="svg-icon svg-icon-lg svg-icon-danger"><!--begin::Svg Icon | path:media/svg/icons/General/Attachment2.svg--><svg
                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -756,21 +757,21 @@
     </g>
     </svg><!--end::Svg Icon--></span>
                 </span>
+                                                        </div>
+
+
+                                                        <div class="d-flex flex-column font-weight-bold">
+                                                            <a href="#"
+                                                               class="text-dark text-hover-primary mb-1 font-size-lg">Briviba
+                                                                SaaS</a>
+                                                            <span class="text-muted">PHP, SQLite, Artisan CLIмм</span>
+                                                        </div>
                                                     </div>
 
 
-                                                    <div class="d-flex flex-column font-weight-bold">
-                                                        <a href="#"
-                                                           class="text-dark text-hover-primary mb-1 font-size-lg">Briviba
-                                                            SaaS</a>
-                                                        <span class="text-muted">PHP, SQLite, Artisan CLIмм</span>
-                                                    </div>
-                                                </div>
+                                                    <div class="d-flex align-items-center mb-2">
 
-
-                                                <div class="d-flex align-items-center mb-2">
-
-                                                    <div class="symbol symbol-40 symbol-light-info mr-5">
+                                                        <div class="symbol symbol-40 symbol-light-info mr-5">
                 <span class="symbol-label">
                     <span class="svg-icon svg-icon-lg  svg-icon-info"><!--begin::Svg Icon | path:media/svg/icons/Communication/Shield-user.svg--><svg
                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -786,21 +787,21 @@
     </g>
     </svg><!--end::Svg Icon--></span>
                 </span>
+                                                        </div>
+
+
+                                                        <div class="d-flex flex-column font-weight-bold">
+                                                            <a href="#"
+                                                               class="text-dark text-hover-primary mb-1 font-size-lg">Briviba
+                                                                SaaS</a>
+                                                            <span class="text-muted">PHP, SQLite, Artisan CLIмм</span>
+                                                        </div>
                                                     </div>
 
 
-                                                    <div class="d-flex flex-column font-weight-bold">
-                                                        <a href="#"
-                                                           class="text-dark text-hover-primary mb-1 font-size-lg">Briviba
-                                                            SaaS</a>
-                                                        <span class="text-muted">PHP, SQLite, Artisan CLIмм</span>
-                                                    </div>
-                                                </div>
+                                                    <div class="d-flex align-items-center mb-2">
 
-
-                                                <div class="d-flex align-items-center mb-2">
-
-                                                    <div class="symbol symbol-40 symbol-light-info mr-5">
+                                                        <div class="symbol symbol-40 symbol-light-info mr-5">
                 <span class="symbol-label">
                     <span class="svg-icon svg-icon-lg  svg-icon-info"><!--begin::Svg Icon | path:media/svg/icons/Communication/Mail-notification.svg--><svg
                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -813,21 +814,21 @@
     </g>
     </svg><!--end::Svg Icon--></span>
                 </span>
+                                                        </div>
+
+
+                                                        <div class="d-flex flex-column font-weight-bold">
+                                                            <a href="#"
+                                                               class="text-dark text-hover-primary mb-1 font-size-lg">Briviba
+                                                                SaaS</a>
+                                                            <span class="text-muted">PHP, SQLite, Artisan CLIмм</span>
+                                                        </div>
                                                     </div>
 
 
-                                                    <div class="d-flex flex-column font-weight-bold">
-                                                        <a href="#"
-                                                           class="text-dark text-hover-primary mb-1 font-size-lg">Briviba
-                                                            SaaS</a>
-                                                        <span class="text-muted">PHP, SQLite, Artisan CLIмм</span>
-                                                    </div>
-                                                </div>
+                                                    <div class="d-flex align-items-center mb-2">
 
-
-                                                <div class="d-flex align-items-center mb-2">
-
-                                                    <div class="symbol symbol-40 symbol-light-info mr-5">
+                                                        <div class="symbol symbol-40 symbol-light-info mr-5">
                 <span class="symbol-label">
                     <span class="svg-icon svg-icon-lg  svg-icon-info"><!--begin::Svg Icon | path:media/svg/icons/Design/Bucket.svg--><svg
                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -842,292 +843,294 @@
     </g>
     </svg><!--end::Svg Icon--></span>
                 </span>
-                                                    </div>
+                                                        </div>
 
 
-                                                    <div class="d-flex flex-column font-weight-bold">
-                                                        <a href="#"
-                                                           class="text-dark text-hover-primary mb-1 font-size-lg">Briviba
-                                                            SaaS</a>
-                                                        <span class="text-muted">PHP, SQLite, Artisan CLIмм</span>
+                                                        <div class="d-flex flex-column font-weight-bold">
+                                                            <a href="#"
+                                                               class="text-dark text-hover-primary mb-1 font-size-lg">Briviba
+                                                                SaaS</a>
+                                                            <span class="text-muted">PHP, SQLite, Artisan CLIмм</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
 
-                                        <div class="tab-pane" id="topbar_notifications_events" role="tabpanel">
+                                            <div class="tab-pane" id="topbar_notifications_events" role="tabpanel">
 
-                                            <div class="navi navi-hover scroll my-4" data-scroll="true"
-                                                 data-height="300" data-mobile-height="200">
+                                                <div class="navi navi-hover scroll my-4" data-scroll="true"
+                                                     data-height="300" data-mobile-height="200">
 
-                                                <a href="#" class="navi-item">
-                                                    <div class="navi-link">
-                                                        <div class="navi-icon mr-2">
-                                                            <i class="flaticon2-line-chart text-success"></i>
-                                                        </div>
-                                                        <div class="navi-text">
-                                                            <div class="font-weight-bold">
-                                                                New report has been received
+                                                    <a href="#" class="navi-item">
+                                                        <div class="navi-link">
+                                                            <div class="navi-icon mr-2">
+                                                                <i class="flaticon2-line-chart text-success"></i>
                                                             </div>
-                                                            <div class="text-muted">
-                                                                23 hrs ago
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-
-
-                                                <a href="#" class="navi-item">
-                                                    <div class="navi-link">
-                                                        <div class="navi-icon mr-2">
-                                                            <i class="flaticon2-paper-plane text-danger"></i>
-                                                        </div>
-                                                        <div class="navi-text">
-                                                            <div class="font-weight-bold">
-                                                                Finance report has been generated
-                                                            </div>
-                                                            <div class="text-muted">
-                                                                25 hrs ago
+                                                            <div class="navi-text">
+                                                                <div class="font-weight-bold">
+                                                                    New report has been received
+                                                                </div>
+                                                                <div class="text-muted">
+                                                                    23 hrs ago
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </a>
+                                                    </a>
 
 
-                                                <a href="#" class="navi-item">
-                                                    <div class="navi-link">
-                                                        <div class="navi-icon mr-2">
-                                                            <i class="flaticon2-user flaticon2-line- text-success"></i>
-                                                        </div>
-                                                        <div class="navi-text">
-                                                            <div class="font-weight-bold">
-                                                                New order has been received
+                                                    <a href="#" class="navi-item">
+                                                        <div class="navi-link">
+                                                            <div class="navi-icon mr-2">
+                                                                <i class="flaticon2-paper-plane text-danger"></i>
                                                             </div>
-                                                            <div class="text-muted">
-                                                                2 hrs ago
+                                                            <div class="navi-text">
+                                                                <div class="font-weight-bold">
+                                                                    Finance report has been generated
+                                                                </div>
+                                                                <div class="text-muted">
+                                                                    25 hrs ago
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </a>
+                                                    </a>
 
 
-                                                <a href="#" class="navi-item">
-                                                    <div class="navi-link">
-                                                        <div class="navi-icon mr-2">
-                                                            <i class="flaticon2-pin text-primary"></i>
-                                                        </div>
-                                                        <div class="navi-text">
-                                                            <div class="font-weight-bold">
-                                                                New customer is registered
+                                                    <a href="#" class="navi-item">
+                                                        <div class="navi-link">
+                                                            <div class="navi-icon mr-2">
+                                                                <i class="flaticon2-user flaticon2-line- text-success"></i>
                                                             </div>
-                                                            <div class="text-muted">
-                                                                3 hrs ago
+                                                            <div class="navi-text">
+                                                                <div class="font-weight-bold">
+                                                                    New order has been received
+                                                                </div>
+                                                                <div class="text-muted">
+                                                                    2 hrs ago
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </a>
+                                                    </a>
 
 
-                                                <a href="#" class="navi-item">
-                                                    <div class="navi-link">
-                                                        <div class="navi-icon mr-2">
-                                                            <i class="flaticon2-sms text-danger"></i>
-                                                        </div>
-                                                        <div class="navi-text">
-                                                            <div class="font-weight-bold">
-                                                                Application has been approved
+                                                    <a href="#" class="navi-item">
+                                                        <div class="navi-link">
+                                                            <div class="navi-icon mr-2">
+                                                                <i class="flaticon2-pin text-primary"></i>
                                                             </div>
-                                                            <div class="text-muted">
-                                                                3 hrs ago
+                                                            <div class="navi-text">
+                                                                <div class="font-weight-bold">
+                                                                    New customer is registered
+                                                                </div>
+                                                                <div class="text-muted">
+                                                                    3 hrs ago
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </a>
+                                                    </a>
 
 
-                                                <a href="#" class="navi-item">
-                                                    <div class="navi-link">
-                                                        <div class="navi-icon mr-2">
-                                                            <i class="flaticon2-pie-chart-3 text-warning"></i>
-                                                        </div>
-                                                        <div class="navinavinavi-text">
-                                                            <div class="font-weight-bold">
-                                                                New file has been uploaded
+                                                    <a href="#" class="navi-item">
+                                                        <div class="navi-link">
+                                                            <div class="navi-icon mr-2">
+                                                                <i class="flaticon2-sms text-danger"></i>
                                                             </div>
-                                                            <div class="text-muted">
-                                                                5 hrs ago
+                                                            <div class="navi-text">
+                                                                <div class="font-weight-bold">
+                                                                    Application has been approved
+                                                                </div>
+                                                                <div class="text-muted">
+                                                                    3 hrs ago
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </a>
+                                                    </a>
 
 
-                                                <a href="#" class="navi-item">
-                                                    <div class="navi-link">
-                                                        <div class="navi-icon mr-2">
-                                                            <i class="flaticon-pie-chart-1 text-info"></i>
-                                                        </div>
-                                                        <div class="navi-text">
-                                                            <div class="font-weight-bold">
-                                                                New user feedback received
+                                                    <a href="#" class="navi-item">
+                                                        <div class="navi-link">
+                                                            <div class="navi-icon mr-2">
+                                                                <i class="flaticon2-pie-chart-3 text-warning"></i>
                                                             </div>
-                                                            <div class="text-muted">
-                                                                8 hrs ago
+                                                            <div class="navinavinavi-text">
+                                                                <div class="font-weight-bold">
+                                                                    New file has been uploaded
+                                                                </div>
+                                                                <div class="text-muted">
+                                                                    5 hrs ago
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </a>
+                                                    </a>
 
 
-                                                <a href="#" class="navi-item">
-                                                    <div class="navi-link">
-                                                        <div class="navi-icon mr-2">
-                                                            <i class="flaticon2-settings text-success"></i>
-                                                        </div>
-                                                        <div class="navi-text">
-                                                            <div class="font-weight-bold">
-                                                                System reboot has been successfully completed
+                                                    <a href="#" class="navi-item">
+                                                        <div class="navi-link">
+                                                            <div class="navi-icon mr-2">
+                                                                <i class="flaticon-pie-chart-1 text-info"></i>
                                                             </div>
-                                                            <div class="text-muted">
-                                                                12 hrs ago
+                                                            <div class="navi-text">
+                                                                <div class="font-weight-bold">
+                                                                    New user feedback received
+                                                                </div>
+                                                                <div class="text-muted">
+                                                                    8 hrs ago
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </a>
+                                                    </a>
 
 
-                                                <a href="#" class="navi-item">
-                                                    <div class="navi-link">
-                                                        <div class="navi-icon mr-2">
-                                                            <i class="flaticon-safe-shield-protection text-primary"></i>
-                                                        </div>
-                                                        <div class="navi-text">
-                                                            <div class="font-weight-bold">
-                                                                New order has been placed
+                                                    <a href="#" class="navi-item">
+                                                        <div class="navi-link">
+                                                            <div class="navi-icon mr-2">
+                                                                <i class="flaticon2-settings text-success"></i>
                                                             </div>
-                                                            <div class="text-muted">
-                                                                15 hrs ago
+                                                            <div class="navi-text">
+                                                                <div class="font-weight-bold">
+                                                                    System reboot has been successfully completed
+                                                                </div>
+                                                                <div class="text-muted">
+                                                                    12 hrs ago
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </a>
+                                                    </a>
 
 
-                                                <a href="#" class="navi-item">
-                                                    <div class="navi-link">
-                                                        <div class="navi-icon mr-2">
-                                                            <i class="flaticon2-notification text-primary"></i>
-                                                        </div>
-                                                        <div class="navi-text">
-                                                            <div class="font-weight-bold">
-                                                                Company meeting canceled
+                                                    <a href="#" class="navi-item">
+                                                        <div class="navi-link">
+                                                            <div class="navi-icon mr-2">
+                                                                <i class="flaticon-safe-shield-protection text-primary"></i>
                                                             </div>
-                                                            <div class="text-muted">
-                                                                19 hrs ago
+                                                            <div class="navi-text">
+                                                                <div class="font-weight-bold">
+                                                                    New order has been placed
+                                                                </div>
+                                                                <div class="text-muted">
+                                                                    15 hrs ago
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </a>
+                                                    </a>
 
 
-                                                <a href="#" class="navi-item">
-                                                    <div class="navi-link">
-                                                        <div class="navi-icon mr-2">
-                                                            <i class="flaticon2-fax text-success"></i>
-                                                        </div>
-                                                        <div class="navi-text">
-                                                            <div class="font-weight-bold">
-                                                                New report has been received
+                                                    <a href="#" class="navi-item">
+                                                        <div class="navi-link">
+                                                            <div class="navi-icon mr-2">
+                                                                <i class="flaticon2-notification text-primary"></i>
                                                             </div>
-                                                            <div class="text-muted">
-                                                                23 hrs ago
+                                                            <div class="navi-text">
+                                                                <div class="font-weight-bold">
+                                                                    Company meeting canceled
+                                                                </div>
+                                                                <div class="text-muted">
+                                                                    19 hrs ago
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </a>
+                                                    </a>
 
 
-                                                <a href="#" class="navi-item">
-                                                    <div class="navi-link">
-                                                        <div class="navi-icon mr-2">
-                                                            <i class="flaticon-download-1 text-danger"></i>
-                                                        </div>
-                                                        <div class="navi-text">
-                                                            <div class="font-weight-bold">
-                                                                Finance report has been generated
+                                                    <a href="#" class="navi-item">
+                                                        <div class="navi-link">
+                                                            <div class="navi-icon mr-2">
+                                                                <i class="flaticon2-fax text-success"></i>
                                                             </div>
-                                                            <div class="text-muted">
-                                                                25 hrs ago
+                                                            <div class="navi-text">
+                                                                <div class="font-weight-bold">
+                                                                    New report has been received
+                                                                </div>
+                                                                <div class="text-muted">
+                                                                    23 hrs ago
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </a>
+                                                    </a>
 
 
-                                                <a href="#" class="navi-item">
-                                                    <div class="navi-link">
-                                                        <div class="navi-icon mr-2">
-                                                            <i class="flaticon-security text-warning"></i>
-                                                        </div>
-                                                        <div class="navi-text">
-                                                            <div class="font-weight-bold">
-                                                                New customer comment recieved
+                                                    <a href="#" class="navi-item">
+                                                        <div class="navi-link">
+                                                            <div class="navi-icon mr-2">
+                                                                <i class="flaticon-download-1 text-danger"></i>
                                                             </div>
-                                                            <div class="text-muted">
-                                                                2 days ago
+                                                            <div class="navi-text">
+                                                                <div class="font-weight-bold">
+                                                                    Finance report has been generated
+                                                                </div>
+                                                                <div class="text-muted">
+                                                                    25 hrs ago
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </a>
+                                                    </a>
 
 
-                                                <a href="#" class="navi-item">
-                                                    <div class="navi-link">
-                                                        <div class="navi-icon mr-2">
-                                                            <i class="flaticon2-analytics-1 text-success"></i>
-                                                        </div>
-                                                        <div class="navi-text">
-                                                            <div class="font-weight-bold">
-                                                                New customer is registered
+                                                    <a href="#" class="navi-item">
+                                                        <div class="navi-link">
+                                                            <div class="navi-icon mr-2">
+                                                                <i class="flaticon-security text-warning"></i>
                                                             </div>
-                                                            <div class="text-muted">
-                                                                3 days ago
+                                                            <div class="navi-text">
+                                                                <div class="font-weight-bold">
+                                                                    New customer comment recieved
+                                                                </div>
+                                                                <div class="text-muted">
+                                                                    2 days ago
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </a>
+                                                    </a>
+
+
+                                                    <a href="#" class="navi-item">
+                                                        <div class="navi-link">
+                                                            <div class="navi-icon mr-2">
+                                                                <i class="flaticon2-analytics-1 text-success"></i>
+                                                            </div>
+                                                            <div class="navi-text">
+                                                                <div class="font-weight-bold">
+                                                                    New customer is registered
+                                                                </div>
+                                                                <div class="text-muted">
+                                                                    3 days ago
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="tab-pane" id="topbar_notifications_logs" role="tabpanel">
+
+                                                <div class="d-flex flex-center text-center text-muted min-h-200px">
+                                                    All caught up!
+                                                    <br/>
+                                                    No new notifications.
+                                                </div>
                                             </div>
                                         </div>
-
-
-                                        <div class="tab-pane" id="topbar_notifications_logs" role="tabpanel">
-
-                                            <div class="d-flex flex-center text-center text-muted min-h-200px">
-                                                All caught up!
-                                                <br/>
-                                                No new notifications.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
+                                    </form>
+                                </div>
                             </div>
-                        </div>
-                        <div class="topbar-item" @click="menuToogle">
-                            <div class="btn btn-icon w-auto btn-clean d-flex align-items-center btn-lg px-2"
-                                 id="kt_quick_user_toggle">
-                                <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
-<!--                                <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">Sean</span>-->
-                                <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">{{ $page.props.auth.user.name}}</span>
-                                <span class="symbol symbol-35 symbol-light-success">
+                            <div class="topbar-item" @click="menuToogle">
+                                <div class="btn btn-icon w-auto btn-clean d-flex align-items-center btn-lg px-2"
+                                     id="kt_quick_user_toggle">
+                                    <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
+                                    <!--                                <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">Sean</span>-->
+                                    <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">{{ $page.props.auth.user.name}}</span>
+                                    <span class="symbol symbol-35 symbol-light-success">
                     <span class="symbol-label font-size-h5 font-weight-bold">S</span>
                 </span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
 <!--        <Footer />-->
     </div>
 
