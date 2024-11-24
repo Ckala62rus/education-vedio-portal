@@ -84,7 +84,7 @@ export default {
             this.invalidCredentials = false;
             axios.post('login', this.form).then(res =>{
                 if (res.status === 200) {
-                    window.location = '/dashboard';
+                    window.location = '/admin/profile';
                 }
             })
             .catch(err => {

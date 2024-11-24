@@ -3,10 +3,10 @@
 use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\LessonCategoryController;
 use App\Http\Controllers\LessonController;
+use App\Http\Controllers\MinioUploadController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -51,7 +51,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['admin', 'auth'])->group(function () {
     Route::get('/admin', function () {
-        return Inertia::render('admin/dashboard');
+        return redirect('admin/profile');
     })->name('www');
 
     Route::get('admin/profile', [ProfileController::class, 'profilePage'])->name('metronic.profile');
@@ -110,6 +110,8 @@ Route::middleware(['admin', 'auth'])->group(function () {
     Route::post('avatar/set', [UserController::class, 'setAvatar']);
     Route::get('avatar/get', [UserController::class, 'getAvatar']);
 });
+
+Route::post('objects', [MinioUploadController::class, 'uploadFile']);
 
 /* Front */
 Route::get('/', [FrontController::class, 'index'])->middleware('blog')->name('front.index');
