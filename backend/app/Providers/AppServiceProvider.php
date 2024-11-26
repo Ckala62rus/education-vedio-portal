@@ -6,6 +6,7 @@ use App\Contracts\LessonCategoryRepositoryInterface;
 use App\Contracts\LessonCategoryServiceInterface;
 use App\Contracts\LessonRepositoryInterface;
 use App\Contracts\LessonServiceInterface;
+use App\Contracts\MinioServiceInterface;
 use App\Contracts\RoleRepositoryInterface;
 use App\Contracts\RoleServiceInterface;
 use App\Contracts\UserRepositoryInterface;
@@ -16,6 +17,7 @@ use App\Repositories\RoleRepository;
 use App\Repositories\UserRepository;
 use App\Services\LessonCategoryService;
 use App\Services\LessonService;
+use App\Services\MinioService;
 use App\Services\RoleService;
 use App\Services\UserService;
 use Illuminate\Routing\UrlGenerator;
@@ -41,6 +43,8 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(LessonCategoryRepositoryInterface::class, LessonCategoryRepository::class);
         $this->app->bind(LessonCategoryServiceInterface::class, LessonCategoryService::class);
+
+        $this->app->bind(MinioServiceInterface::class, MinioService::class);
     }
 
     /**
