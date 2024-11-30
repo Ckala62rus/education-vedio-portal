@@ -52,23 +52,27 @@ class MinioService implements MinioServiceInterface
     public function saveFile(UploadedFile $file): string
     {
         $folderToSave = $this->getFolderFromMime($file->getMimeType());
-        $minioUrl = env("APP_URL");
         $fileName =  Str::uuid() . '.' . $file->getClientOriginalExtension();
 
         $res = Storage::disk('s3')
             ->putFileAs($folderToSave, $file, $fileName);
-        return $minioUrl . "/api/" . $res;
+        return $this->getUrlPath() . $res;
     }
 
     /**
      * Get file URL by filename and folder from S3
      * @param string $filename
      * @param string $folder
-     * @return string
+     * @return string|null
      */
-    public function getFileUrl(string $filename, string $folder): string
+    public function getFileUrl(string $filename, string $folder): string|null
     {
-        // TODO: Implement getFileUrl() method.
+        $minioPathFile = $folder . '/' . $filename;
+        $isExistsFile = $this->fileExists($filename, $folder);
+        if ( $isExistsFile ) {
+            return $this->getUrlPath() . $minioPathFile;
+        }
+        return null;
     }
 
     /**
