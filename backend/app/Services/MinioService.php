@@ -85,4 +85,46 @@ class MinioService implements MinioServiceInterface
     {
         // TODO: Implement deleteFile() method.
     }
+
+    /**
+     * Get nginx path to get file
+     * @return string
+     */
+    public function getUrlPath(): string
+    {
+        return config("minio.MINIO_NGINX") . config('minio.AWS_BUCKET') . '/';
+    }
+
+    /**
+     * Check file exists. Return true or false.
+     * @param string $filename
+     * @param string $folder
+     * @return string|null
+     */
+    public function fileExists(string $filename, string $folder): null|string
+    {
+        return Storage::disk('s3')->get($folder . '/' . $filename);
+    }
+
+    /**
+     * Get all files from bucket
+     * @param string $folder
+     * @return array|null
+     */
+    public function getAllFiles(string $folder): array|null
+    {
+        $files = Storage::disk('s3')->files($folder);
+
+        if (!$files) {
+            return [];
+        }
+
+        $out = [];
+
+        foreach ($files as $file) {
+            $out[] = $this->getUrlPath() . $file;
+        }
+
+        return $out;
+    }
 }
