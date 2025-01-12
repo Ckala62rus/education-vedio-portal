@@ -7,6 +7,7 @@ import { InertiaProgress } from '@inertiajs/progress';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import Metronic from "@/Layouts/Metronic.vue";
+import store from './store'
 
 import {ServerTable, ClientTable} from 'v-tables-3';
 
@@ -46,6 +47,7 @@ createInertiaApp({
             .use(ElementPlus)
             .use(Bootstrap5Pagination)
             .use(Bootstrap4Pagination)
+            .use(store)
             .mount(el);
     },
 });
