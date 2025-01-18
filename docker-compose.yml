@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
   video_portal_backend:
-    image: ckala62rus/docker_php_sqlsrv-backend-new-template
+    image: ckala62rus/video_portal_backend:latest
     build: docker/php
     container_name: video_portal_backend
     working_dir: /var/www/
@@ -67,12 +67,12 @@ services:
   minio:
     container_name: minio
     image: quay.io/minio/minio
-    command: server --address 0.0.0.0:9000 --console-address ":9001" /data
+    command: server --address 0.0.0.0:9002 --console-address ":9001" /data
     environment:
       MINIO_ROOT_USER: minio
       MINIO_ROOT_PASSWORD: minio123
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:9000/minio/health/live" ]
+      test: [ "CMD", "curl", "-f", "http://localhost:9002/minio/health/live" ]
       interval: 30s
       timeout: 20s
       retries: 3
@@ -80,7 +80,7 @@ services:
       - ./storage/data:/data
     ports:
       # Bind explicitly to 127.0.0.1
-      - "127.0.0.1:9000:9000"
+      - "127.0.0.1:9002:9002"
       - "9001:9001"
 
   nginx_minio:
