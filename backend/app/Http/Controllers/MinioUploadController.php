@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\MinioServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -10,22 +11,27 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class MinioUploadController extends BaseController
 {
     /**
+     * MinioUploadController constructor.
+     * @param MinioServiceInterface $minioService
+     */
+    public function __construct(
+        private MinioServiceInterface $minioService,
+    ){}
+
+    /**
+     * Upload file to minio S3 and return url
     * @param Request $request
     * @return JsonResponse
     */
     public function UploadFile(Request $request): JsonResponse
     {
         $files = $request->file('files');
-
-        $minioUrl = env("APP_URL");
         $savedFiles = [];
 
         foreach ($files as $file) {
-            /** @var UploadedFile $file */
-            $fileName = time() . '.' . $file->getClientOriginalExtension();
-            $res = Storage::disk('s3')
-                ->putFileAs("images", $file, $fileName);
-            $savedFiles[] = $minioUrl . "/api/" . $res;
+            $savedFiles[] = $this
+                ->minioService
+                ->saveFile($file);
         }
 
         return  $this->response(
