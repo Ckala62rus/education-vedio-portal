@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthTokenController;
+use App\Http\Controllers\MinioUploadController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,3 +27,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('me', [AuthTokenController::class, 'me']);
     Route::post('logout', [AuthTokenController::class, 'logout']);
 });
+
+Route::post('objects', [MinioUploadController::class, 'uploadFile']);
+Route::get('objects', [MinioUploadController::class, 'allFiles']);
+Route::get('objects/{file_name}', [MinioUploadController::class, 'getObjectByName']);
