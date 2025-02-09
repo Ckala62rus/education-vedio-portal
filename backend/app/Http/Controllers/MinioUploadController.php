@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Contracts\MinioServiceInterface;
 use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class MinioUploadController extends BaseController
@@ -43,28 +41,38 @@ class MinioUploadController extends BaseController
 
     /**
      * @param Request $request
+     * @param string $filename
      * @return JsonResponse
      */
-    public function getObjectByName(Request $request): JsonResponse {
-        $files = $request->file('files');
-        $bucket = $request->get("bucket");
+    public function getObjectByName(Request $request, string $filename): JsonResponse {
+        $folder = $request->get('folder');
 
-        $uploadFiles = [];
-
-        foreach ($files as $file) {
-            /** @var UploadedFile $file */
-            $fileName = time() . '.' . $file->getClientOriginalExtension();
-
-            $minioUrl = env("APP_URL");
-            $bucket = env("AWS_BUCKET");
-
-            $uploadFiles[] = $minioUrl . '/' . Storage::disk('s3')
-                ->putFileAs($bucket, $file, $fileName);
-        }
+        $file = $this
+            ->minioService
+            ->getFileUrl($filename, $folder);
 
         return  $this->response(
-            data: $uploadFiles,
-            message: "Files uploaded",
+            data: ['url' => $file],
+            message: "Get file",
+            statusCode:  JsonResponse::HTTP_OK,
+        );
+    }
+
+    /**
+     * Get all files
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function allFiles(Request $request): JsonResponse
+    {
+        $data = $request->all();
+        $files = $this
+            ->minioService
+            ->getAllFiles($data['folder']);
+
+        return  $this->response(
+            data: ['files' => $files],
+            message: "Get file",
             statusCode:  JsonResponse::HTTP_OK,
         );
     }
