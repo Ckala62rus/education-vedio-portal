@@ -16,3 +16,10 @@ docker push ckala62rus/docker_php_sqlsrv-cron-new-template --all-tags
 
 #### Create new tag from base image
 docker tag docker_php_sqlsrv-cron-new-template ckala62rus/docker_php_sqlsrv-cron-new-template:1.0.0
+
+
+#### TODO
+- Сделать загрузку видео и превью. видео в minio, превью в MediaLibrary.
+- Сделать вывод видео на страницу
+- Сделать страницу с загрузкой видео на сервер.
+- Сделать API аутентификацию.
