@@ -84,6 +84,6 @@ abstract class BaseRepository implements BaseRepositoryInterface
     {
         return $this
             ->model
-            ->paginate();
+            ->paginate(perPage: $limit);
     }
 }
