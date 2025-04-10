@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Contracts\CategoryVideoRepositoryInterface;
+use App\Contracts\CategoryVideoServiceInterface;
 use App\Contracts\LessonCategoryRepositoryInterface;
 use App\Contracts\LessonCategoryServiceInterface;
 use App\Contracts\LessonRepositoryInterface;
@@ -11,10 +13,12 @@ use App\Contracts\RoleRepositoryInterface;
 use App\Contracts\RoleServiceInterface;
 use App\Contracts\UserRepositoryInterface;
 use App\Contracts\UserServiceInterface;
+use App\Repositories\CategoryVideoRepository;
 use App\Repositories\LessonCategoryRepository;
 use App\Repositories\LessonRepository;
 use App\Repositories\RoleRepository;
 use App\Repositories\UserRepository;
+use App\Services\CategoryVideoService;
 use App\Services\LessonCategoryService;
 use App\Services\LessonService;
 use App\Services\MinioService;
@@ -45,6 +49,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(LessonCategoryServiceInterface::class, LessonCategoryService::class);
 
         $this->app->bind(MinioServiceInterface::class, MinioService::class);
+
+        $this->app->bind(CategoryVideoRepositoryInterface::class, CategoryVideoRepository::class);
+        $this->app->bind(CategoryVideoServiceInterface::class, CategoryVideoService::class);
     }
 
     /**
