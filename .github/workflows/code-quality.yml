@@ -38,7 +38,15 @@ jobs:
     - name: Check PHP syntax
       working-directory: ./backend
       run: |
-        find . -name "*.php" -not -path "./vendor/*" -exec php -l {} \; | grep -v "No syntax errors"
+        echo "🔍 Checking PHP syntax..."
+        SYNTAX_ERRORS=$(find . -name "*.php" -not -path "./vendor/*" -exec php -l {} \; | grep -v "No syntax errors" || true)
+        if [ -n "$SYNTAX_ERRORS" ]; then
+          echo "❌ PHP syntax errors found:"
+          echo "$SYNTAX_ERRORS"
+          exit 1
+        else
+          echo "✅ All PHP files have correct syntax!"
+        fi
 
     - name: Run PHP CS Fixer (Check only)
       working-directory: ./backend
