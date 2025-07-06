@@ -83,11 +83,18 @@ jobs:
       run: composer audit --no-dev
       continue-on-error: true
 
-    - name: Run PHPUnit (Quick tests)
+    - name: Run PHPUnit (Quick unit tests)
       working-directory: ./backend
       run: |
-        cp .env.example .env
-        php artisan key:generate
+        # Create minimal .env for Laravel bootstrap
+        echo "APP_NAME=TestApp" > .env
+        echo "APP_ENV=testing" >> .env
+        echo "APP_KEY=base64:$(openssl rand -base64 32)" >> .env
+        echo "APP_DEBUG=true" >> .env
+        echo "APP_URL=http://localhost" >> .env
+        
+        # Unit tests use phpunit.xml configuration for database and other settings
+        # No database migrations needed for pure unit tests
         php vendor/bin/phpunit --testsuite=Unit --stop-on-failure
 
     - name: Check Laravel best practices
@@ -95,9 +102,11 @@ jobs:
       run: |
         echo "🔍 Checking Laravel best practices..."
         
-        # Проверка на использование env() в конфигах
-        if grep -r "env(" config/ 2>/dev/null; then
-          echo "❌ Found env() calls in config files. Use config() instead."
+        # Проверка на использование env() вне конфигов (в app/, routes/, etc.)
+        ENV_VIOLATIONS=$(find app/ routes/ -name "*.php" -exec grep -l "env(" {} \; 2>/dev/null || true)
+        if [ -n "$ENV_VIOLATIONS" ]; then
+          echo "❌ Found env() calls outside config files. Use config() instead in:"
+          echo "$ENV_VIOLATIONS"
           exit 1
         fi
         
@@ -112,6 +121,13 @@ jobs:
           exit 1
         fi
         
+        # Проверка на использование DB::raw без привязки параметров
+        RAW_SQL_ISSUES=$(grep -r "DB::raw\|->raw(" app/ 2>/dev/null | grep -v "DB::raw('COUNT\|DB::raw('SUM\|DB::raw('AVG\|DB::raw('MAX\|DB::raw('MIN" || true)
+        if [ -n "$RAW_SQL_ISSUES" ]; then
+          echo "⚠️ Found raw SQL queries. Ensure they are properly sanitized:"
+          echo "$RAW_SQL_ISSUES"
+        fi
+        
         echo "✅ Laravel best practices check passed!"
 
     - name: Check for common security issues
@@ -119,20 +135,33 @@ jobs:
       run: |
         echo "🔒 Checking for security issues..."
         
-        # Проверка на sql injection patterns
-        if grep -r "DB::raw\|->raw(" app/ 2>/dev/null | grep -v "//"; then
-          echo "⚠️ Found raw SQL queries. Make sure they are properly sanitized."
-        fi
-        
         # Проверка на eval usage
-        if grep -r "eval(" app/ 2>/dev/null; then
+        EVAL_USAGE=$(grep -r "eval(" app/ 2>/dev/null || true)
+        if [ -n "$EVAL_USAGE" ]; then
           echo "❌ Found eval() usage. This is dangerous!"
+          echo "$EVAL_USAGE"
           exit 1
         fi
         
         # Проверка на массовое присваивание
-        if grep -r "fillable.*=.*\[\]" app/Models/ 2>/dev/null; then
-          echo "⚠️ Found empty fillable arrays. This might allow mass assignment."
+        MASS_ASSIGNMENT=$(grep -r "fillable.*=.*\[\]" app/Models/ 2>/dev/null || true)
+        if [ -n "$MASS_ASSIGNMENT" ]; then
+          echo "⚠️ Found empty fillable arrays. This might allow mass assignment:"
+          echo "$MASS_ASSIGNMENT"
+        fi
+        
+        # Проверка на небезопасные функции
+        UNSAFE_FUNCTIONS=$(grep -r "shell_exec\|exec\|system\|passthru" app/ 2>/dev/null || true)
+        if [ -n "$UNSAFE_FUNCTIONS" ]; then
+          echo "⚠️ Found potentially unsafe functions:"
+          echo "$UNSAFE_FUNCTIONS"
+        fi
+        
+        # Проверка на хардкод секретов
+        HARDCODED_SECRETS=$(grep -r "password.*=.*['\"][^'\"]*['\"]" app/ 2>/dev/null | grep -v "bcrypt\|Hash::" || true)
+        if [ -n "$HARDCODED_SECRETS" ]; then
+          echo "⚠️ Found potentially hardcoded passwords:"
+          echo "$HARDCODED_SECRETS"
         fi
         
         echo "✅ Security check completed!"
