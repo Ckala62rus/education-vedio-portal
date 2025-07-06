@@ -13,6 +13,7 @@ jobs:
       contents: read
       issues: write
       pull-requests: write
+      checks: write
     
     strategy:
       matrix:
