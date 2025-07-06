@@ -19,7 +19,16 @@ jobs:
       matrix:
         php-version: [8.1, 8.2]
     
-    # SQLite used for all tests - no external services needed
+    services:
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
     - name: Checkout code
@@ -29,7 +38,7 @@ jobs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ matrix.php-version }}
-        extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv
+        extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, redis
         coverage: xdebug
 
     - name: Setup Node.js
@@ -84,6 +93,10 @@ jobs:
         echo "QUEUE_CONNECTION=sync" >> .env
         echo "MAIL_MAILER=array" >> .env
         echo "TELESCOPE_ENABLED=false" >> .env
+        echo "REDIS_CLIENT=predis" >> .env
+        echo "REDIS_HOST=127.0.0.1" >> .env
+        echo "REDIS_PORT=6379" >> .env
+        echo "REDIS_DB=0" >> .env
 
     - name: Run database migrations
       working-directory: ./backend
@@ -101,6 +114,22 @@ jobs:
         mkdir -p storage/framework/views
         chmod -R 755 storage
         chmod -R 755 bootstrap/cache
+
+    - name: Test Redis connection
+      working-directory: ./backend
+      run: |
+        echo "Testing Redis connection..."
+        php -r "
+          try {
+            \$redis = new Redis();
+            \$redis->connect('127.0.0.1', 6379);
+            echo 'Redis connection successful!' . PHP_EOL;
+            \$redis->close();
+          } catch (Exception \$e) {
+            echo 'Redis connection failed: ' . \$e->getMessage() . PHP_EOL;
+            exit(1);
+          }
+        "
 
     - name: Run PHP CS Fixer (Code Style)
       working-directory: ./backend
