@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryVideoController;
 use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\LessonCategoryController;
 use App\Http\Controllers\LessonController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\MinioUploadController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VideoController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -101,6 +103,20 @@ Route::middleware(['admin', 'auth'])->group(function () {
         Route::get('category/{id}', [LessonCategoryController::class, 'show']);
         Route::put('category/{id}', [LessonCategoryController::class, 'update']);
         Route::delete('category/{id}', [LessonCategoryController::class, 'destroy']);
+
+        // Video
+        Route::get('videos', [VideoController::class, 'index'])->name('metronic.video.index');
+
+        // Category Video
+        Route::get('category-videos', [CategoryVideoController::class, 'index'])->name('metronic.category-video.index');
+        Route::post('category-videos', [CategoryVideoController::class, 'store']);
+        Route::get('category-videos/create', [CategoryVideoController::class, 'create'])->name('metronic.category-video.create');
+        Route::get('category-videos/paginate', [CategoryVideoController::class, 'getAllCategoryVideosWithPagination']);
+        Route::get('category-videos/collection', [CategoryVideoController::class, 'getAllCategoryVideoCollection']);
+        Route::get('category-videos/{id}/edit', [CategoryVideoController::class, 'edit'])->name('metronic.category-video.edit');
+        Route::get('category-videos/{id}', [CategoryVideoController::class, 'show']);
+        Route::put('category-videos/{id}', [CategoryVideoController::class, 'update']);
+        Route::delete('category-videos/{id}', [CategoryVideoController::class, 'destroy']);
     });
 
     // Permission

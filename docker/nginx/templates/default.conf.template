@@ -1,8 +1,6 @@
-upstream backend {
-    server ${NGINX_UPSTREAM};
-}
-
 server {
+    resolver 127.0.0.11 valid=30s;
+    client_max_body_size 400M;
     listen 80;
 
     root /var/www/public;
@@ -13,7 +11,8 @@ server {
     }
 
     location ~ \.php$ {
-        fastcgi_pass backend;
+        set $upstream ${NGINX_UPSTREAM};
+        fastcgi_pass $upstream;
         fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;
         include        fastcgi_params;
         fastcgi_send_timeout 21600;

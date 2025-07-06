@@ -1,0 +1,184 @@
+name: Laravel Tests
+
+on:
+  push:
+    branches: [ main, dev ]
+  pull_request:
+    branches: [ main, dev ]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
+      checks: write
+    
+    strategy:
+      matrix:
+        php-version: [8.1, 8.2]
+    
+    services:
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.php-version }}
+        extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, redis
+        coverage: xdebug
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: backend/package-lock.json
+
+    - name: Cache Composer packages
+      id: composer-cache
+      uses: actions/cache@v4
+      with:
+        path: backend/vendor
+        key: ${{ runner.os }}-php-${{ matrix.php-version }}-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-php-${{ matrix.php-version }}-
+
+    - name: Install Composer dependencies
+      working-directory: ./backend
+      run: composer install --no-progress --prefer-dist --optimize-autoloader
+
+    - name: Install Node.js dependencies
+      working-directory: ./backend
+      run: npm ci
+
+    - name: Build frontend assets
+      working-directory: ./backend
+      run: npm run build
+
+    - name: Copy environment file
+      working-directory: ./backend
+      run: cp .env.example .env
+
+    - name: Generate application key
+      working-directory: ./backend
+      run: php artisan key:generate
+
+    - name: Set up testing environment
+      working-directory: ./backend
+      run: |
+        # Create SQLite database for feature tests
+        touch database/database.sqlite
+        
+        # Configure testing environment variables
+        echo "DB_CONNECTION=testing" >> .env
+        echo "DB_DATABASE=database/database.sqlite" >> .env
+        echo "APP_ENV=testing" >> .env
+        echo "APP_DEBUG=true" >> .env
+        echo "CACHE_DRIVER=array" >> .env
+        echo "SESSION_DRIVER=array" >> .env
+        echo "QUEUE_CONNECTION=sync" >> .env
+        echo "MAIL_MAILER=array" >> .env
+        echo "TELESCOPE_ENABLED=false" >> .env
+        echo "REDIS_CLIENT=predis" >> .env
+        echo "REDIS_HOST=127.0.0.1" >> .env
+        echo "REDIS_PORT=6379" >> .env
+        echo "REDIS_DB=0" >> .env
+
+    - name: Run database migrations
+      working-directory: ./backend
+      run: |
+        # Run migrations using .env configuration (DB_CONNECTION=testing)
+        php artisan migrate --force
+        php artisan db:seed --class=PermissionSeeder --force
+
+    - name: Create storage directories
+      working-directory: ./backend
+      run: |
+        mkdir -p storage/logs
+        mkdir -p storage/framework/cache
+        mkdir -p storage/framework/sessions
+        mkdir -p storage/framework/views
+        chmod -R 755 storage
+        chmod -R 755 bootstrap/cache
+
+    - name: Test Redis connection
+      working-directory: ./backend
+      run: |
+        echo "Testing Redis connection..."
+        php -r "
+          try {
+            \$redis = new Redis();
+            \$redis->connect('127.0.0.1', 6379);
+            echo 'Redis connection successful!' . PHP_EOL;
+            \$redis->close();
+          } catch (Exception \$e) {
+            echo 'Redis connection failed: ' . \$e->getMessage() . PHP_EOL;
+            exit(1);
+          }
+        "
+
+    - name: Run PHP CS Fixer (Code Style)
+      working-directory: ./backend
+      run: |
+        if [ -f "vendor/bin/php-cs-fixer" ]; then
+          vendor/bin/php-cs-fixer fix --dry-run --diff --verbose
+        else
+          echo "PHP CS Fixer not installed, skipping code style check"
+        fi
+      continue-on-error: true
+
+    - name: Run PHPStan (Static Analysis)
+      working-directory: ./backend
+      run: |
+        if [ -f "vendor/bin/phpstan" ]; then
+          vendor/bin/phpstan analyse --memory-limit=2G
+        else
+          echo "PHPStan not installed, skipping static analysis"
+        fi
+      continue-on-error: true
+
+    - name: Run tests
+      working-directory: ./backend
+      run: |
+        php vendor/bin/phpunit --coverage-clover=coverage.xml --log-junit=test-results.xml
+
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: test-results-php-${{ matrix.php-version }}
+        path: |
+          backend/test-results.xml
+          backend/coverage.xml
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v4
+      if: matrix.php-version == '8.1'
+      with:
+        file: ./backend/coverage.xml
+        flags: unittests
+        name: codecov-umbrella
+        fail_ci_if_error: false
+
+    - name: Comment Test Results
+      uses: dorny/test-reporter@v1
+      if: success() || failure()
+      with:
+        name: PHPUnit Tests (PHP ${{ matrix.php-version }})
+        path: backend/test-results.xml
+        reporter: java-junit
+        fail-on-error: false 

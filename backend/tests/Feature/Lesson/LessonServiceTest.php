@@ -6,12 +6,12 @@ use App\Contracts\LessonRepositoryInterface;
 use App\Models\Lesson;
 use App\Services\LessonService;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class LessonServiceTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /**
      * A basic feature test example.

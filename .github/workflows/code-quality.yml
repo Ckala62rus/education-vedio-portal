@@ -1,0 +1,223 @@
+name: Code Quality Checks
+
+on:
+  pull_request:
+    branches: [ main, dev ]
+    paths:
+      - 'backend/**'
+      - '.github/workflows/**'
+
+jobs:
+  code_quality:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
+      checks: write
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'
+        extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv
+
+    - name: Cache Composer packages
+      uses: actions/cache@v4
+      with:
+        path: backend/vendor
+        key: ${{ runner.os }}-php-composer-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-php-composer-
+
+    - name: Install Composer dependencies
+      working-directory: ./backend
+      run: composer install --no-progress --prefer-dist --optimize-autoloader
+
+    - name: Check PHP syntax
+      working-directory: ./backend
+      run: |
+        echo "🔍 Checking PHP syntax..."
+        SYNTAX_ERRORS=$(find . -name "*.php" -not -path "./vendor/*" -exec php -l {} \; | grep -v "No syntax errors" || true)
+        if [ -n "$SYNTAX_ERRORS" ]; then
+          echo "❌ PHP syntax errors found:"
+          echo "$SYNTAX_ERRORS"
+          exit 1
+        else
+          echo "✅ All PHP files have correct syntax!"
+        fi
+
+    - name: Run PHP CS Fixer (Check only)
+      working-directory: ./backend
+      run: |
+        if [ -f "vendor/bin/php-cs-fixer" ]; then
+          vendor/bin/php-cs-fixer fix --dry-run --diff --verbose --config=.php-cs-fixer.php
+        else
+          echo "⚠️ PHP CS Fixer not found. Install it with: composer require --dev friendsofphp/php-cs-fixer"
+        fi
+      continue-on-error: true
+
+    - name: Run PHPStan
+      working-directory: ./backend
+      run: |
+        if [ -f "vendor/bin/phpstan" ]; then
+          vendor/bin/phpstan analyse --memory-limit=2G --error-format=github
+        else
+          echo "⚠️ PHPStan not found. Install it with: composer require --dev phpstan/phpstan"
+        fi
+      continue-on-error: true
+
+    - name: Run Psalm
+      working-directory: ./backend
+      run: |
+        if [ -f "vendor/bin/psalm" ]; then
+          vendor/bin/psalm --output-format=github --show-info=false
+        else
+          echo "⚠️ Psalm not found. Install it with: composer require --dev vimeo/psalm"
+        fi
+      continue-on-error: true
+
+    - name: Security audit with Composer
+      working-directory: ./backend
+      run: composer audit --no-dev
+      continue-on-error: true
+
+    - name: Run PHPUnit (Quick unit tests)
+      working-directory: ./backend
+      run: |
+        # Create minimal .env for Laravel bootstrap
+        echo "APP_NAME=TestApp" > .env
+        echo "APP_ENV=testing" >> .env
+        echo "APP_KEY=base64:$(openssl rand -base64 32)" >> .env
+        echo "APP_DEBUG=true" >> .env
+        echo "APP_URL=http://localhost" >> .env
+        
+        # Unit tests use phpunit.xml configuration for database and other settings
+        # No database migrations needed for pure unit tests
+        php vendor/bin/phpunit --testsuite=Unit --stop-on-failure
+
+    - name: Check Laravel best practices
+      working-directory: ./backend
+      run: |
+        echo "🔍 Checking Laravel best practices..."
+        
+        # Проверка на использование env() вне конфигов (в app/, routes/, etc.)
+        ENV_VIOLATIONS=$(find app/ routes/ -name "*.php" -exec grep -l "env(" {} \; 2>/dev/null || true)
+        if [ -n "$ENV_VIOLATIONS" ]; then
+          echo "❌ Found env() calls outside config files. Use config() instead in:"
+          echo "$ENV_VIOLATIONS"
+          exit 1
+        fi
+        
+        # Проверка на debug режим в продакшене
+        if grep -r "APP_DEBUG=true" .env.example 2>/dev/null; then
+          echo "⚠️ Warning: APP_DEBUG is set to true in .env.example"
+        fi
+        
+        # Проверка на наличие .env в git
+        if git ls-files | grep -q "^\.env$"; then
+          echo "❌ .env file should not be committed to git"
+          exit 1
+        fi
+        
+        # Проверка на использование DB::raw без привязки параметров
+        RAW_SQL_ISSUES=$(grep -r "DB::raw\|->raw(" app/ 2>/dev/null | grep -v "DB::raw('COUNT\|DB::raw('SUM\|DB::raw('AVG\|DB::raw('MAX\|DB::raw('MIN" || true)
+        if [ -n "$RAW_SQL_ISSUES" ]; then
+          echo "⚠️ Found raw SQL queries. Ensure they are properly sanitized:"
+          echo "$RAW_SQL_ISSUES"
+        fi
+        
+        echo "✅ Laravel best practices check passed!"
+
+    - name: Check for common security issues
+      working-directory: ./backend
+      run: |
+        echo "🔒 Checking for security issues..."
+        
+        # Проверка на eval usage
+        EVAL_USAGE=$(grep -r "eval(" app/ 2>/dev/null || true)
+        if [ -n "$EVAL_USAGE" ]; then
+          echo "❌ Found eval() usage. This is dangerous!"
+          echo "$EVAL_USAGE"
+          exit 1
+        fi
+        
+        # Проверка на массовое присваивание
+        MASS_ASSIGNMENT=$(grep -r "fillable.*=.*\[\]" app/Models/ 2>/dev/null || true)
+        if [ -n "$MASS_ASSIGNMENT" ]; then
+          echo "⚠️ Found empty fillable arrays. This might allow mass assignment:"
+          echo "$MASS_ASSIGNMENT"
+        fi
+        
+        # Проверка на небезопасные функции
+        UNSAFE_FUNCTIONS=$(grep -r "shell_exec\|exec\|system\|passthru" app/ 2>/dev/null || true)
+        if [ -n "$UNSAFE_FUNCTIONS" ]; then
+          echo "⚠️ Found potentially unsafe functions:"
+          echo "$UNSAFE_FUNCTIONS"
+        fi
+        
+        # Проверка на хардкод секретов
+        HARDCODED_SECRETS=$(grep -r "password.*=.*['\"][^'\"]*['\"]" app/ 2>/dev/null | grep -v "bcrypt\|Hash::" || true)
+        if [ -n "$HARDCODED_SECRETS" ]; then
+          echo "⚠️ Found potentially hardcoded passwords:"
+          echo "$HARDCODED_SECRETS"
+        fi
+        
+        echo "✅ Security check completed!"
+
+    - name: Comment PR with results
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v7
+      continue-on-error: true
+      with:
+        script: |
+          try {
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            
+            const botComment = comments.find(comment => 
+              comment.user.type === 'Bot' && 
+              comment.body.includes('Code Quality Report')
+            );
+            
+            const body = `## 🔍 Code Quality Report
+            
+            ✅ **PHP Syntax Check**: Passed
+            ✅ **Security Audit**: Completed
+            ✅ **Laravel Best Practices**: Verified
+            ✅ **Unit Tests**: Quick validation passed
+            
+            📊 **Static Analysis**: Check the action logs for detailed results
+            
+            > This is an automated check. For full test results, see the "Laravel Tests" workflow.`;
+            
+            if (botComment) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body: body
+              });
+              console.log('✅ Updated existing comment');
+            } else {
+              await github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: body
+              });
+              console.log('✅ Created new comment');
+            }
+          } catch (error) {
+            console.log('⚠️ Could not create/update PR comment:', error.message);
+            console.log('This is not critical - code quality checks still passed!');
+          } 

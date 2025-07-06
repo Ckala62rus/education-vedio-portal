@@ -6,7 +6,10 @@ use App\Contracts\LessonCategoryServiceInterface;
 use App\Http\Requests\Admin\Dashboard\LessonCategory\LessonCategoryPaginationRequest;
 use App\Http\Requests\Admin\Dashboard\LessonCategory\LessonCategoryStoreRequest;
 use App\Http\Requests\Admin\Dashboard\LessonCategory\LessonCategoryUpdateRequest;
+use App\Http\Resources\Admin\Dashboard\lessonCategory\LessonCategoryRedisCache;
 use App\Http\Resources\Admin\Dashboard\LessonCategory\LessonCategoryResource;
+use App\Models\LessonCategory;
+use Illuminate\Support\Facades\Redis;
 use Inertia\Inertia;
 use Inertia\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -159,13 +162,29 @@ class LessonCategoryController extends BaseController
      */
     public function getAllLessonCategoriesWithPagination(LessonCategoryPaginationRequest $request): JsonResponse
     {
-        $categories = $this
-            ->lessonCategoryService
-            ->getAllLessonsCategoriesWithPagination($request->all()['limit']);
+        $categories = Redis::get("lesson_categories:admin:{$request->page}");
+
+        if ($categories == null){
+            $categories = $this
+                ->lessonCategoryService
+                ->getAllLessonsCategoriesWithPagination($request->all()['limit']);
+
+            if ($categories){
+                // time in seconds
+                Redis::set("lesson_categories:admin:{$request->page}", $categories->toJson(), 'EX', 60);
+            }
+
+            return response()->json([
+                'data' => LessonCategoryResource::collection($categories),
+                'count' => $categories->total()
+            ]);
+        }
+
+        $cacheDecoded = json_decode($categories, true);
 
         return response()->json([
-            'data' => LessonCategoryResource::collection($categories),
-            'count' => $categories->total()
+            'data' => LessonCategoryResource::collection(LessonCategory::hydrate($cacheDecoded['data'])),
+            'count' => $cacheDecoded['total']
         ]);
     }
 
