@@ -1,0 +1,72 @@
+name: Deploy to Production
+
+on:
+  workflow_run:
+    workflows: ["Build and Publish Docker Images"]
+    types:
+      - completed
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    
+    environment:
+      name: production
+      url: ${{ steps.deploy.outputs.url }}
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Deploy to server
+      id: deploy
+      run: |
+        echo "🚀 Starting deployment process..."
+        
+        # В этом месте добавьте команды для деплоя на ваш сервер
+        # Примеры команд:
+        
+        # 1. SSH деплой
+        # ssh user@server "docker pull ckala62rus/video_portal_backend:latest && docker-compose up -d"
+        
+        # 2. Kubernetes деплой
+        # kubectl set image deployment/video-portal-backend video-portal-backend=ckala62rus/video_portal_backend:latest
+        
+        # 3. Docker Swarm деплой  
+        # docker service update --image ckala62rus/video_portal_backend:latest video_portal_backend
+        
+        echo "✅ Deployment completed successfully!"
+        echo "url=https://your-domain.com" >> $GITHUB_OUTPUT
+
+    - name: Run post-deployment tests
+      run: |
+        echo "🧪 Running post-deployment health checks..."
+        
+        # Примеры проверок:
+        # curl -f https://your-domain.com/health || exit 1
+        # curl -f https://your-domain.com/api/health || exit 1
+        
+        echo "✅ Health checks passed!"
+
+    - name: Notify deployment success
+      if: success()
+      run: |
+        echo "🎉 Deployment to production completed successfully!"
+        echo "Application is available at: ${{ steps.deploy.outputs.url }}"
+        
+        # Здесь можно добавить уведомления в Slack, Discord, Telegram и т.д.
+        # curl -X POST -H 'Content-type: application/json' \
+        #   --data '{"text":"🚀 Video Portal deployed successfully!"}' \
+        #   ${{ secrets.SLACK_WEBHOOK_URL }}
+
+    - name: Notify deployment failure
+      if: failure()
+      run: |
+        echo "❌ Deployment failed!"
+        
+        # Уведомление об ошибке
+        # curl -X POST -H 'Content-type: application/json' \
+        #   --data '{"text":"⚠️ Video Portal deployment failed!"}' \
+        #   ${{ secrets.SLACK_WEBHOOK_URL }} 

@@ -1,0 +1,173 @@
+name: Code Quality Checks
+
+on:
+  pull_request:
+    branches: [ main, dev ]
+    paths:
+      - 'backend/**'
+      - '.github/workflows/**'
+
+jobs:
+  code_quality:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'
+        extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv
+
+    - name: Cache Composer packages
+      uses: actions/cache@v3
+      with:
+        path: backend/vendor
+        key: ${{ runner.os }}-php-composer-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-php-composer-
+
+    - name: Install Composer dependencies
+      working-directory: ./backend
+      run: composer install --no-progress --prefer-dist --optimize-autoloader
+
+    - name: Check PHP syntax
+      working-directory: ./backend
+      run: |
+        find . -name "*.php" -not -path "./vendor/*" -exec php -l {} \; | grep -v "No syntax errors"
+
+    - name: Run PHP CS Fixer (Check only)
+      working-directory: ./backend
+      run: |
+        if [ -f "vendor/bin/php-cs-fixer" ]; then
+          vendor/bin/php-cs-fixer fix --dry-run --diff --verbose --config=.php-cs-fixer.php
+        else
+          echo "⚠️ PHP CS Fixer not found. Install it with: composer require --dev friendsofphp/php-cs-fixer"
+        fi
+      continue-on-error: true
+
+    - name: Run PHPStan
+      working-directory: ./backend
+      run: |
+        if [ -f "vendor/bin/phpstan" ]; then
+          vendor/bin/phpstan analyse --memory-limit=2G --error-format=github
+        else
+          echo "⚠️ PHPStan not found. Install it with: composer require --dev phpstan/phpstan"
+        fi
+      continue-on-error: true
+
+    - name: Run Psalm
+      working-directory: ./backend
+      run: |
+        if [ -f "vendor/bin/psalm" ]; then
+          vendor/bin/psalm --output-format=github --show-info=false
+        else
+          echo "⚠️ Psalm not found. Install it with: composer require --dev vimeo/psalm"
+        fi
+      continue-on-error: true
+
+    - name: Security audit with Composer
+      working-directory: ./backend
+      run: composer audit --no-dev
+      continue-on-error: true
+
+    - name: Run PHPUnit (Quick tests)
+      working-directory: ./backend
+      run: |
+        cp .env.example .env
+        php artisan key:generate
+        php vendor/bin/phpunit --testsuite=Unit --stop-on-failure
+
+    - name: Check Laravel best practices
+      working-directory: ./backend
+      run: |
+        echo "🔍 Checking Laravel best practices..."
+        
+        # Проверка на использование env() в конфигах
+        if grep -r "env(" config/ 2>/dev/null; then
+          echo "❌ Found env() calls in config files. Use config() instead."
+          exit 1
+        fi
+        
+        # Проверка на debug режим в продакшене
+        if grep -r "APP_DEBUG=true" .env.example 2>/dev/null; then
+          echo "⚠️ Warning: APP_DEBUG is set to true in .env.example"
+        fi
+        
+        # Проверка на наличие .env в git
+        if git ls-files | grep -q "^\.env$"; then
+          echo "❌ .env file should not be committed to git"
+          exit 1
+        fi
+        
+        echo "✅ Laravel best practices check passed!"
+
+    - name: Check for common security issues
+      working-directory: ./backend
+      run: |
+        echo "🔒 Checking for security issues..."
+        
+        # Проверка на sql injection patterns
+        if grep -r "DB::raw\|->raw(" app/ 2>/dev/null | grep -v "//"; then
+          echo "⚠️ Found raw SQL queries. Make sure they are properly sanitized."
+        fi
+        
+        # Проверка на eval usage
+        if grep -r "eval(" app/ 2>/dev/null; then
+          echo "❌ Found eval() usage. This is dangerous!"
+          exit 1
+        fi
+        
+        # Проверка на массовое присваивание
+        if grep -r "fillable.*=.*\[\]" app/Models/ 2>/dev/null; then
+          echo "⚠️ Found empty fillable arrays. This might allow mass assignment."
+        fi
+        
+        echo "✅ Security check completed!"
+
+    - name: Comment PR with results
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const { data: comments } = await github.rest.issues.listComments({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: context.issue.number,
+          });
+          
+          const botComment = comments.find(comment => 
+            comment.user.type === 'Bot' && 
+            comment.body.includes('Code Quality Report')
+          );
+          
+          const body = `## 🔍 Code Quality Report
+          
+          ✅ **PHP Syntax Check**: Passed
+          ✅ **Security Audit**: Completed
+          ✅ **Laravel Best Practices**: Verified
+          ✅ **Unit Tests**: Quick validation passed
+          
+          📊 **Static Analysis**: Check the action logs for detailed results
+          
+          > This is an automated check. For full test results, see the "Laravel Tests" workflow.`;
+          
+          if (botComment) {
+            github.rest.issues.updateComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: botComment.id,
+              body: body
+            });
+          } else {
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });
+          } 

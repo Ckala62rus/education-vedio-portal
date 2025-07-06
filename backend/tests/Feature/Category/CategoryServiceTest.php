@@ -5,12 +5,12 @@ namespace Tests\Feature\Category;
 use App\Contracts\LessonCategoryRepositoryInterface;
 use App\Models\LessonCategory;
 use App\Services\LessonCategoryService;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class CategoryServiceTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /**
      * A basic feature test example.

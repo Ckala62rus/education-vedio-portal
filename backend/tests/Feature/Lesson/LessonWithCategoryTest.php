@@ -4,12 +4,12 @@ namespace Tests\Feature\Lesson;
 
 use App\Models\Lesson;
 use App\Models\LessonCategory;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class LessonWithCategoryTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /**
      * A basic feature test example.

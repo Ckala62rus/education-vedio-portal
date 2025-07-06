@@ -6,7 +6,7 @@ use App\Models\LessonCategory;
 use App\Models\User;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Foundation\Testing\Concerns\MakesHttpRequests;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
@@ -14,7 +14,7 @@ use Tests\TestCase;
 class CategoryControllerTest extends TestCase
 {
 //    use DatabaseTransactions;
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /**
      * A basic feature test example.
